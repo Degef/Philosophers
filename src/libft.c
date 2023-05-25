@@ -6,11 +6,11 @@
 /*   By: Degef <Degei411233@outlook.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 16:28:57 by Degef             #+#    #+#             */
-/*   Updated: 2023/05/15 19:54:11 by Degef            ###   ########.fr       */
+/*   Updated: 2023/05/25 18:54:01 by Degef            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../includes/philosophers.h"
 
 int	ft_atoi(const	char *nptr)
 {

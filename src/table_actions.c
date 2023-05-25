@@ -6,11 +6,11 @@
 /*   By: Degef <Degei411233@outlook.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:09:00 by Degef             #+#    #+#             */
-/*   Updated: 2023/05/23 17:01:22 by Degef            ###   ########.fr       */
+/*   Updated: 2023/05/25 18:54:08 by Degef            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../includes/philosophers.h"
 
 void	take_fork_even(t_philos *philo)
 {

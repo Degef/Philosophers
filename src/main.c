@@ -6,11 +6,11 @@
 /*   By: Degef <Degei411233@outlook.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 16:21:58 by Degef             #+#    #+#             */
-/*   Updated: 2023/05/23 16:14:54 by Degef            ###   ########.fr       */
+/*   Updated: 2023/05/25 18:54:04 by Degef            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../includes/philosophers.h"
 
 void	launch_philo(t_data *data)
 {

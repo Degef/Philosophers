@@ -6,11 +6,11 @@
 /*   By: Degef <Degei411233@outlook.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:27:50 by Degef             #+#    #+#             */
-/*   Updated: 2023/05/23 16:19:11 by Degef            ###   ########.fr       */
+/*   Updated: 2023/05/25 18:54:11 by Degef            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../includes/philosophers.h"
 
 long long	timestamp(void)
 {

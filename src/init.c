@@ -6,11 +6,11 @@
 /*   By: Degef <Degei411233@outlook.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 14:59:12 by Degef             #+#    #+#             */
-/*   Updated: 2023/05/23 16:13:28 by Degef            ###   ########.fr       */
+/*   Updated: 2023/05/25 18:53:56 by Degef            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "../includes/philosophers.h"
 
 int	init_data(int ac, char **argv, t_data *data)
 {
