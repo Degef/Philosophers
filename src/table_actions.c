@@ -3,20 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   table_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Degef <Degei411233@outlook.com>            +#+  +:+       +#+        */
+/*   By: Degef <dsium@student.42abudhabi.ae>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:09:00 by Degef             #+#    #+#             */
-/*   Updated: 2023/05/25 18:54:08 by Degef            ###   ########.fr       */
+/*   Updated: 2023/09/02 13:35:03 by Degef            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
+//The two while loop in the take fork function checkes for two things
+//First: Make the philo wait if the fork is -1(already taken)
+//Second: It checks if the fork value if equal with the philo id 
+//which mean if the fork was used by the same philosopher before(this will handle greedy philosopher case)
 
 void	take_fork_even(t_philos *philo)
 {
 	pthread_mutex_lock(&philo->data->fork_locker[philo->fork_r]);
 	pthread_mutex_lock(&philo->data->fork_locker[philo->fork_l]);
-	while (philo->data->fork[philo->fork_l] || philo->data->fork[philo->fork_r])
+	while (philo->data->fork[philo->fork_l] == -1 
+			|| philo->data->fork[philo->fork_r] == -1
+			|| philo->data->fork[philo->fork_r] == philo->id
+			|| philo->data->fork[philo->fork_l] == philo->id)
 	{
 		pthread_mutex_unlock(&philo->data->fork_locker[philo->fork_r]);
 		pthread_mutex_unlock(&philo->data->fork_locker[philo->fork_l]);
@@ -24,8 +31,8 @@ void	take_fork_even(t_philos *philo)
 		pthread_mutex_lock(&philo->data->fork_locker[philo->fork_r]);
 		pthread_mutex_lock(&philo->data->fork_locker[philo->fork_l]);
 	}
-	philo->data->fork[philo->fork_l] = 1;
-	philo->data->fork[philo->fork_r] = 1;
+	philo->data->fork[philo->fork_l] = -1;
+	philo->data->fork[philo->fork_r] = -1;
 	pthread_mutex_unlock(&philo->data->fork_locker[philo->fork_r]);
 	pthread_mutex_unlock(&philo->data->fork_locker[philo->fork_l]);
 	display(philo, " \e[0;32m🥄 has taken  fork \033[0m", real_time(philo), 0);
@@ -39,8 +46,10 @@ void	take_fork(t_philos *philo)
 		usleep(1500);
 		pthread_mutex_lock(&philo->data->fork_locker[philo->fork_l]);
 		pthread_mutex_lock(&philo->data->fork_locker[philo->fork_r]);
-		while (philo->data->fork[philo->fork_l]
-			|| philo->data->fork[philo->fork_r])
+		while (philo->data->fork[philo->fork_l] == -1 
+				|| philo->data->fork[philo->fork_r] == -1
+				|| philo->data->fork[philo->fork_r] == philo->id
+				|| philo->data->fork[philo->fork_l] == philo->id)
 		{
 			pthread_mutex_unlock(&philo->data->fork_locker[philo->fork_l]);
 			pthread_mutex_unlock(&philo->data->fork_locker[philo->fork_r]);
@@ -48,8 +57,8 @@ void	take_fork(t_philos *philo)
 			pthread_mutex_lock(&philo->data->fork_locker[philo->fork_l]);
 			pthread_mutex_lock(&philo->data->fork_locker[philo->fork_r]);
 		}
-		philo->data->fork[philo->fork_l] = 1;
-		philo->data->fork[philo->fork_r] = 1;
+		philo->data->fork[philo->fork_l] = -1;
+		philo->data->fork[philo->fork_r] = -1;
 		pthread_mutex_unlock(&philo->data->fork_locker[philo->fork_l]);
 		pthread_mutex_unlock(&philo->data->fork_locker[philo->fork_r]);
 		display(philo, " \e[0;32m🥄 has taken  fork \033[0m", real_time(philo), 0);
@@ -75,10 +84,10 @@ void	eat_philo(t_philos *philo)
 		pthread_mutex_unlock(&philo->data->num_meals_locker);
 		ft_usleep(philo->data->t_eat, philo);
 		pthread_mutex_lock(&philo->data->fork_locker[philo->fork_l]);
-		philo->data->fork[philo->fork_l] = 0;
+		philo->data->fork[philo->fork_l] = philo->id;
 		pthread_mutex_unlock(&philo->data->fork_locker[philo->fork_l]);
 		pthread_mutex_lock(&philo->data->fork_locker[philo->fork_r]);
-		philo->data->fork[philo->fork_r] = 0;
+		philo->data->fork[philo->fork_r] = philo->id;
 		pthread_mutex_unlock(&philo->data->fork_locker[philo->fork_r]);
 		return ;
 	}
